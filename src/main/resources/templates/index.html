@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4">Welcome to PetCare</h1>
+        <p class="lead">Your trusted partner for pet grooming, boarding, and walking services</p>
+        <a href="/register" class="btn btn-primary btn-lg me-2">Get Started</a>
+        <a href="/services" class="btn btn-outline-primary btn-lg">View Services</a>
+    </div>
+
+    <!-- Services Overview -->
+    <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h3 class="card-title">🏠 Pet Boarding</h3>
+                    <p class="card-text">Safe and comfortable boarding for your pets while you're away.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h3 class="card-title">✂️ Pet Grooming</h3>
+                    <p class="card-text">Professional grooming services to keep your pets looking their best.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h3 class="card-title">🐕 Dog Walking</h3>
+                    <p class="card-text">Regular walks to keep your dogs happy, healthy, and exercised.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center mt-5 p-5 bg-light rounded">
+        <h2>Ready to get started?</h2>
+        <p>Create an account today and schedule your first appointment!</p>
+        <a href="/register" class="btn btn-primary btn-lg">Sign Up Now</a>
+    </div>
+</div>
+</body>
+</html>
