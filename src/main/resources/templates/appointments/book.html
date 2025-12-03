@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title>Book Appointment</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="mb-4">Book an Appointment</h2>
+
+            <form th:action="@{/appointments/book}" th:object="${appointment}" method="post">
+
+                <!-- Select Pet -->
+                <div class="mb-3">
+                    <label for="petId" class="form-label">Select Pet</label>
+                    <select class="form-select" id="petId" name="petId" required>
+                        <option value="">Choose a pet...</option>
+                        <option th:each="pet : ${pets}" th:value="${pet.id}"
+                                th:text="${pet.name + ' (' + pet.breed + ')'}"></option>
+                    </select>
+                </div>
+
+                <!-- Select Service -->
+                <div class="mb-3">
+                    <label for="serviceId" class="form-label">Select Service</label>
+                    <select class="form-select" id="serviceId" name="serviceId" required>
+                        <option value="">Choose a service...</option>
+                        <option th:each="service : ${services}" th:value="${service.id}">
+                            <span th:text="${service.name + ' - $' + service.basePrice}"></span>
+                        </option>
+                    </select>
+                    <div class="mt-2">
+                        <div th:each="service : ${services}" class="mb-2">
+                            <strong th:text="${service.name}"></strong>:
+                            <span th:text="${service.description}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appointment Date -->
+                <div class="mb-3">
+                    <label for="appointmentDate" class="form-label">Appointment Date</label>
+                    <input type="date" class="form-control" id="appointmentDate"
+                           th:field="*{appointmentDate}" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('appointmentDate')}"
+                         th:errors="*{appointmentDate}"></div>
+                </div>
+
+                <!-- Appointment Time -->
+                <div class="mb-3">
+                    <label for="appointmentTime" class="form-label">Appointment Time</label>
+                    <input type="time" class="form-control" id="appointmentTime"
+                           th:field="*{appointmentTime}" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('appointmentTime')}"
+                         th:errors="*{appointmentTime}"></div>
+                </div>
+
+                <!-- Notes -->
+                <div class="mb-3">
+                    <label for="notes" class="form-label">Additional Notes (Optional)</label>
+                    <textarea class="form-control" id="notes" th:field="*{notes}" rows="3"
+                              placeholder="Any special requests or information..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Book Appointment</button>
+                <a href="/appointments" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

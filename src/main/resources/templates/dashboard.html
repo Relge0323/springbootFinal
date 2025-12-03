@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1>Welcome to Your Dashboard, <span th:text="${username}"></span>!</h1>
+            <p class="lead">Manage your pets and appointments here.</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">My Pets</h5>
+                    <p class="card-text">View and manage your registered pets.</p>
+                    <a href="/pets" class="btn btn-primary">View Pets</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Book Appointment</h5>
+                    <p class="card-text">Schedule grooming, boarding, or walking services.</p>
+                    <a href="/appointments/book" class="btn btn-primary">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">My Appointments</h5>
+                    <p class="card-text">View your upcoming and past appointments.</p>
+                    <a href="/appointments" class="btn btn-primary">View Appointments</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">My Account</h5>
+                    <p class="card-text">Update your profile information.</p>
+                    <a href="/account" class="btn btn-secondary">Manage Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

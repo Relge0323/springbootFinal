@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title>Edit Pet</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-4">Edit Pet</h2>
+
+            <form th:action="@{/pets/edit/{id}(id=${pet.id})}" th:object="${pet}" method="post">
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Pet Name</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="breed" class="form-label">Breed</label>
+                    <input type="text" class="form-control" id="breed" th:field="*{breed}" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="age" class="form-label">Age (years)</label>
+                    <input type="number" class="form-control" id="age" th:field="*{age}" min="0" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="weight" class="form-label">Weight (lbs)</label>
+                    <input type="number" step="0.1" class="form-control" id="weight" th:field="*{weight}" min="0" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="specialNeeds" class="form-label">Special Needs (Optional)</label>
+                    <textarea class="form-control" id="specialNeeds" th:field="*{specialNeeds}" rows="3"
+                              placeholder="Any allergies, medications, or special care instructions..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update Pet</button>
+                <a href="/pets" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

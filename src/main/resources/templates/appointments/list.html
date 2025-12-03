@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title>My Appointments</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>My Appointments</h1>
+        <a href="/appointments/book" class="btn btn-primary">Book New Appointment</a>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div th:if="${param.booked}" class="alert alert-success">
+        Appointment booked successfully! Status: Pending approval.
+    </div>
+    <div th:if="${param.cancelled}" class="alert alert-info">
+        Appointment cancelled successfully.
+    </div>
+    <div th:if="${param.error}" class="alert alert-danger">
+        You are not authorized to access that appointment.
+    </div>
+
+    <!-- Empty State -->
+    <div th:if="${#lists.isEmpty(appointments)}" class="alert alert-info">
+        You don't have any appointments yet. <a href="/appointments/book">Book your first appointment!</a>
+    </div>
+
+    <!-- Appointments List -->
+    <div th:if="${!#lists.isEmpty(appointments)}">
+        <div class="card mb-3" th:each="appointment : ${appointments}">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5 class="card-title">
+                            <span th:text="${appointment.service.name}"></span> -
+                            <span th:text="${appointment.pet.name}"></span>
+                        </h5>
+                        <p class="card-text">
+                            <strong>Date:</strong>
+                            <span th:text="${#temporals.format(appointment.appointmentDate, 'MMM dd, yyyy')}"></span>
+                            <br>
+                            <strong>Time:</strong>
+                            <span th:text="${#temporals.format(appointment.appointmentTime, 'hh:mm a')}"></span>
+                            <br>
+                            <strong>Status:</strong>
+                            <span class="badge"
+                                  th:classappend="${appointment.status == T(com.egler.petcare.model.Appointment.AppointmentStatus).PENDING ? 'bg-warning' :
+                                                       appointment.status == T(com.egler.petcare.model.Appointment.AppointmentStatus).CONFIRMED ? 'bg-success' :
+                                                       appointment.status == T(com.egler.petcare.model.Appointment.AppointmentStatus).COMPLETED ? 'bg-info' : 'bg-secondary'}"
+                                  th:text="${appointment.status}"></span>
+                            <br>
+                            <strong>Price:</strong> $<span th:text="${appointment.service.basePrice}"></span>
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <a th:href="@{/appointments/{id}(id=${appointment.id})}"
+                           class="btn btn-sm btn-info mb-2">View Details</a>
+                        <br>
+                        <form th:action="@{/appointments/cancel/{id}(id=${appointment.id})}"
+                              method="post" style="display: inline;"
+                              onsubmit="return confirm('Are you sure you want to cancel this appointment?');"
+                              th:if="${appointment.status != T(com.egler.petcare.model.Appointment.AppointmentStatus).CANCELLED}">
+                            <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
