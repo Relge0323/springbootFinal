@@ -5,23 +5,24 @@
 <head>
     <title>Login</title>
 </head>
+
 <body>
 <div layout:fragment="content">
     <div class="row justify-content-center">
         <div class="col-md-5">
             <h2 class="mb-4">Login to PetCare</h2>
 
-            <!-- Success message after registration -->
+            <!-- success message after registration -->
             <div th:if="${param.registered}" class="alert alert-success">
                 Registration successful! Please login.
             </div>
 
-            <!-- Error message for failed login -->
+            <!-- error message for failed login -->
             <div th:if="${param.error}" class="alert alert-danger">
                 Invalid username or password.
             </div>
 
-            <!-- Logout success message -->
+            <!-- logout success message -->
             <div th:if="${param.logout}" class="alert alert-info">
                 You have been logged out successfully.
             </div>

@@ -5,6 +5,7 @@
 <head>
     <title>My Appointments</title>
 </head>
+
 <body>
 <div layout:fragment="content">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -12,7 +13,7 @@
         <a href="/appointments/book" class="btn btn-primary">Book New Appointment</a>
     </div>
 
-    <!-- Success/Error Messages -->
+    <!-- success/error messages -->
     <div th:if="${param.booked}" class="alert alert-success">
         Appointment booked successfully! Status: Pending approval.
     </div>
@@ -23,12 +24,12 @@
         You are not authorized to access that appointment.
     </div>
 
-    <!-- Empty State -->
+    <!-- empty state -->
     <div th:if="${#lists.isEmpty(appointments)}" class="alert alert-info">
         You don't have any appointments yet. <a href="/appointments/book">Book your first appointment!</a>
     </div>
 
-    <!-- Appointments List -->
+    <!-- appointments list -->
     <div th:if="${!#lists.isEmpty(appointments)}">
         <div class="card mb-3" th:each="appointment : ${appointments}">
             <div class="card-body">

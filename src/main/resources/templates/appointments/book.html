@@ -5,6 +5,7 @@
 <head>
     <title>Book Appointment</title>
 </head>
+
 <body>
 <div layout:fragment="content">
     <div class="row justify-content-center">
@@ -13,7 +14,7 @@
 
             <form th:action="@{/appointments/book}" th:object="${appointment}" method="post">
 
-                <!-- Select Pet -->
+                <!-- select Pet -->
                 <div class="mb-3">
                     <label for="petId" class="form-label">Select Pet</label>
                     <select class="form-select" id="petId" name="petId" required>
@@ -23,7 +24,7 @@
                     </select>
                 </div>
 
-                <!-- Select Service -->
+                <!-- select Service -->
                 <div class="mb-3">
                     <label for="serviceId" class="form-label">Select Service</label>
                     <select class="form-select" id="serviceId" name="serviceId" required>
@@ -40,7 +41,7 @@
                     </div>
                 </div>
 
-                <!-- Appointment Date -->
+                <!-- appointment date -->
                 <div class="mb-3">
                     <label for="appointmentDate" class="form-label">Appointment Date</label>
                     <input type="date" class="form-control" id="appointmentDate"
@@ -49,7 +50,7 @@
                          th:errors="*{appointmentDate}"></div>
                 </div>
 
-                <!-- Appointment Time -->
+                <!-- appointment time -->
                 <div class="mb-3">
                     <label for="appointmentTime" class="form-label">Appointment Time</label>
                     <input type="time" class="form-control" id="appointmentTime"
@@ -58,7 +59,7 @@
                          th:errors="*{appointmentTime}"></div>
                 </div>
 
-                <!-- Notes -->
+                <!-- notes -->
                 <div class="mb-3">
                     <label for="notes" class="form-label">Additional Notes (Optional)</label>
                     <textarea class="form-control" id="notes" th:field="*{notes}" rows="3"

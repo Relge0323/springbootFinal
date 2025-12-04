@@ -43,7 +43,7 @@ public class AppointmentService {
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(() -> new RuntimeException("Pet not found"));
 
-        // Security check: make sure the pet belongs to the user
+        //security check: make sure the pet belongs to the user
         if (!pet.getOwner().getUsername().equals(username)) {
             throw new RuntimeException("Unauthorized: Pet does not belong to user");
         }

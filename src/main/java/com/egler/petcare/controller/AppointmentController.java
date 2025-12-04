@@ -29,7 +29,7 @@ public class AppointmentController {
     @Autowired
     private ServiceOfferingRepository serviceOfferingRepository;
 
-    // List all appointments for logged-in user
+    //list all appointments for logged-in user
     @GetMapping
     public String listAppointments(Authentication authentication, Model model) {
         String username = authentication.getName();
@@ -38,13 +38,13 @@ public class AppointmentController {
         return "appointments/list";
     }
 
-    // Show book appointment form
+    //show book appointment form
     @GetMapping("/book")
     public String showBookingForm(Authentication authentication, Model model) {
         String username = authentication.getName();
         List<Pet> pets = petService.getPetsByUsername(username);
 
-        // Check if user has any pets
+        //check if user has any pets
         if (pets.isEmpty()) {
             return "redirect:/pets/add?needPet=true";
         }
@@ -57,7 +57,7 @@ public class AppointmentController {
         return "appointments/book";
     }
 
-    // Process booking form
+    //process booking form
     @PostMapping("/book")
     public String bookAppointment(@Valid @ModelAttribute("appointment") Appointment appointment,
                                   BindingResult result,
@@ -79,7 +79,7 @@ public class AppointmentController {
         return "redirect:/appointments?booked=true";
     }
 
-    // View appointment details
+    //view appointment details
     @GetMapping("/{id}")
     public String viewAppointment(@PathVariable Long id,
                                   Authentication authentication,
@@ -96,7 +96,7 @@ public class AppointmentController {
         return "appointments/view";
     }
 
-    // Cancel appointment
+    //cancel appointment
     @PostMapping("/cancel/{id}")
     public String cancelAppointment(@PathVariable Long id, Authentication authentication) {
         String username = authentication.getName();

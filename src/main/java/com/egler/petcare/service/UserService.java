@@ -24,12 +24,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // check if a username is already taken
+    //check if a username is already taken
     public boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
     }
 
-    // check if an email is already taken
+    //check if an email is already taken
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
