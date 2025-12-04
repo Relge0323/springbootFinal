@@ -4,6 +4,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * ServiceOffering represents a service provided by the business
+ * Walking, Grooming, Boarding
+ * Each service has a name, description, and price
+ */
 @Entity
 @Table(name = "services")
 @Data
@@ -26,6 +32,7 @@ public class ServiceOffering {
     @Column(nullable = false)
     private Boolean active = true;
 
+    // constructor for easy creation of service offerings
     public ServiceOffering(String name, String description, Double basePrice) {
         this.name = name;
         this.description = description;

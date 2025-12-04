@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
+//Appointment represents a scheduled service appointment
+//Links a User, Pet, and Service with a date/time
+//Appointment objects have a status that tracks their lifecycle (PENDING, CONFIRMED, COMPLETED, CANCELLED)
 @Entity
 @Table(name = "appointments")
 @Data
@@ -40,6 +44,7 @@ public class Appointment {
     @Column(nullable = false)
     private LocalTime appointmentTime;
 
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AppointmentStatus status = AppointmentStatus.PENDING;
@@ -47,10 +52,11 @@ public class Appointment {
     @Column(length = 1000)
     private String notes;
 
+
     public enum AppointmentStatus {
-        PENDING,
-        CONFIRMED,
-        COMPLETED,
-        CANCELLED
+        PENDING, // waiting for approval
+        CONFIRMED, // approved by admin
+        COMPLETED, // service finished
+        CANCELLED // cancelled
     }
 }

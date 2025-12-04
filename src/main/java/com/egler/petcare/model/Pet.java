@@ -6,6 +6,11 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * Pet represents a pet that belongs to a user
+ * Pets are registered by users and can be selected when booking appointments
+ */
 @Entity
 @Table(name = "pets")
 @Data
@@ -32,9 +37,12 @@ public class Pet {
     @Column(nullable = false)
     private Double weight;
 
+    //an optional field for any special needs, allergies, or care instructions
     @Column(length = 500)
     private String specialNeeds;
 
+    //many pets can belong to one user
+    // JoinColumn creates a foreign key column "user_id" in the pets table
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User owner;

@@ -10,13 +10,18 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/** User represents a registered user in the system
+ * Users can be customers or admins
+ * Each user can own multiple pets and book appointments
+ */
 @Entity
 @Table(name = "users")
 @Data
 @NoArgsConstructor
 public class User {
 
-    @Id
+    @Id // marked as primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -43,12 +48,15 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
+    // role will determine permissions
+    // "User" for customers, and "Admin" for administrators
     @Column(nullable = false)
     private String role = "USER";
 
     @Column(nullable = false)
     private boolean enabled = true;
 
+    // a user can own many pets
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> pets = new ArrayList<>();
 }

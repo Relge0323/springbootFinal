@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+//AppointmentService handles business logic for appointment booking and management
 @Service
 public class AppointmentService {
 
@@ -29,10 +30,12 @@ public class AppointmentService {
     @Autowired
     private ServiceOfferingRepository serviceOfferingRepository;
 
+    //return all appointments for a user, ordered by most recent date
     public List<Appointment> getAppointmentsByUsername(String username) {
         return appointmentRepository.findByUserUsernameOrderByAppointmentDateDesc(username);
     }
 
+    //create a new appointment
     public Appointment createAppointment(Long petId, Long serviceId, Appointment appointment, String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -56,15 +59,18 @@ public class AppointmentService {
         return appointmentRepository.save(appointment);
     }
 
+    //find a single appointment by ID
     public Optional<Appointment> getAppointmentById(Long id) {
         return appointmentRepository.findById(id);
     }
 
+    //verify an appointment belongs to a specific user
     public boolean isAppointmentOwnedByUser(Long appointmentId, String username) {
         Optional<Appointment> appointment = appointmentRepository.findById(appointmentId);
         return appointment.isPresent() && appointment.get().getUser().getUsername().equals(username);
     }
 
+    //delete an appointment
     public void deleteAppointment(Long id) {
         appointmentRepository.deleteById(id);
     }
